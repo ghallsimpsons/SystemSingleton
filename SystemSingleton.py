@@ -37,13 +37,12 @@ class SystemSingleton(object):
         else:
             return fname
 
-    def get_process_lock(self, check_proc=True):
+    def get_process_lock(self):
         """
         Check if PID file is empty, and if so, add our PID and start time so
-        another client can not run. If the PID file is not empty and
-        check_proc=True, check if the PID corresponds to a process started at
-        the same time. If so, or if check_proc=False, get_process_lock raises
-        a SystemSingletonException.
+        another process can not run. If the PID file is not empty, check if the
+        PID corresponds to a process started at the same time. If so,
+        get_process_lock raises a SystemSingletonException.
         """
         try:
             with open(self.pid_filename, 'r') as lock_file:
@@ -53,10 +52,6 @@ class SystemSingleton(object):
             pass
         else:
             # If PID file did exist, we check if it corresponds to a running process.
-            if not check_proc:
-                # check_proc is false, so pid existence is all we need
-                raise SystemSingletonException("PID file {0} has PID {1}".format(
-                    self.pid_filename, pid))
             if start_time == self.__process_start_time(pid):
                 raise SystemSingletonException("Process already running: PID {0}".format(pid))
 
@@ -68,7 +63,7 @@ class SystemSingleton(object):
 
     def free_process_lock(self):
         """
-        Clear PID file so another client can start.
+        Clear PID file so another process can start.
         """
         with open(self.pid_filename, 'w+') as lock_file:
             pass
