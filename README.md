@@ -8,7 +8,7 @@ exist on the system at a given time (relies on `pgrep`).
 Critical singleton methods can be protected by calling them from within a `with`
 block.
 
-```
+```python3
 class MyClass(SystemSingleton):
     def __init__(self):
         pass
@@ -25,7 +25,7 @@ at once. It does this by creating a `.MyClass.pid` file in the current working
 directory with the PID and start time of the process. To change the location
 of the PID file, you can provide a directory to the base class:
 
-```
+```python3
 class MyClass(SystemSingleton):
     def __init__(self):
         super().__init__(runfile_path='/var/run')
@@ -39,7 +39,7 @@ easy to shove into existing code, and 2) it should still allow you to
 interactively create and work with wrapped classes if mutex operation is not
 needed. For instance, you ought to be able to do the following:
 
-```
+```python3
 # Process 1
 with MyClass() as me:
     me.critical_function()
