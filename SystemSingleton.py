@@ -1,7 +1,5 @@
 import os
-import warnings
 import subprocess
-import signal
 
 class SystemSingletonException(Exception):
     pass
