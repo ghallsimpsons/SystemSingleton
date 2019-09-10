@@ -59,5 +59,5 @@ solution. This motivated the implementation of the PID file format.
 If a global runfile path is not provided, instances launched from different
 working directories will run simultaneously.
 
-The runfile is not checked and written atomically. If two processes are written
+The runfile is not checked and written atomically. If two processes are started simultaneously, both are likely to run.
 
