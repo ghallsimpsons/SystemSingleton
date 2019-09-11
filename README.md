@@ -1,7 +1,7 @@
 # SystemSingleton
 
 A simple base class which allows only a single instance of derived classes to
-exist on the system at a given time (relies on `pgrep`).
+exist on the (\*nix) system at a given time.
 
 ## Usage
 
